@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: 061eb700e4b07aa4e8989870799242b6
+timeCreated: 1509302134
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Berlt_Detail_Engine_Left
+    100002: Berlt_Detail_Engine_Left1
+    100004: Blue_Warp_engines
+    100006: Detail_Engine_left
+    100008: Detail_Engine_left1
+    100010: Engine_left
+    100012: Engine_Right
+    100014: Ship_Bottom
+    100016: Ship_Front
+    100018: //RootNode
+    100020: Top_Detail
+    100022: Windows
+    100024: Yellow_Engines_Rotation
+    400000: Berlt_Detail_Engine_Left
+    400002: Berlt_Detail_Engine_Left1
+    400004: Blue_Warp_engines
+    400006: Detail_Engine_left
+    400008: Detail_Engine_left1
+    400010: Engine_left
+    400012: Engine_Right
+    400014: Ship_Bottom
+    400016: Ship_Front
+    400018: //RootNode
+    400020: Top_Detail
+    400022: Windows
+    400024: Yellow_Engines_Rotation
+    2300000: Berlt_Detail_Engine_Left
+    2300002: Berlt_Detail_Engine_Left1
+    2300004: Blue_Warp_engines
+    2300006: Detail_Engine_left
+    2300008: Detail_Engine_left1
+    2300010: Engine_left
+    2300012: Engine_Right
+    2300014: Ship_Bottom
+    2300016: Ship_Front
+    2300018: Top_Detail
+    2300020: Windows
+    2300022: Yellow_Engines_Rotation
+    3300000: Berlt_Detail_Engine_Left
+    3300002: Berlt_Detail_Engine_Left1
+    3300004: Blue_Warp_engines
+    3300006: Detail_Engine_left
+    3300008: Detail_Engine_left1
+    3300010: Engine_left
+    3300012: Engine_Right
+    3300014: Ship_Bottom
+    3300016: Ship_Front
+    3300018: Top_Detail
+    3300020: Windows
+    3300022: Yellow_Engines_Rotation
+    4300000: Berlt_Detail_Engine_Left
+    4300002: Ship_Front
+    4300004: Blue_Warp_engines
+    4300006: Yellow_Engines_Rotation
+    4300008: Engine_left
+    4300010: Engine_Right
+    4300012: Detail_Engine_left
+    4300014: Top_Detail
+    4300016: Ship_Bottom
+    4300018: Windows
+    4300020: Detail_Engine_left1
+    4300022: Berlt_Detail_Engine_Left1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

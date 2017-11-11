@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: fe3fdb27d303d7b40bce9ff1750a90ca
+timeCreated: 1508773470
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Blue_Warp
+    100002: cube
+    100004: cube1
+    100006: cube2
+    100008: cube3
+    100010: cube4
+    100012: cube5
+    100014: cylinder
+    100016: cylinder1
+    100018: cylinder2
+    100020: cylinder3
+    100022: Door_Atras
+    100024: Door_Retratil
+    100026: Engine
+    100028: Engine1
+    100030: hatch
+    100032: polymsh
+    100034: polymsh_detached
+    100036: polymsh_extracted
+    100038: polymsh_extracted1
+    100040: polymsh_extracted2
+    100042: polymsh_extracted3
+    100044: polymsh_extracted4
+    100046: polymsh_extracted5
+    100048: //RootNode
+    100050: Tail
+    100052: Windows
+    100054: Windows1
+    100056: Windows2
+    100058: Yellow_Engines
+    100060: Yellow_Engines1
+    100062: Yellow_Engines2
+    100064: Yellow_Engines3
+    400000: Blue_Warp
+    400002: cube
+    400004: cube1
+    400006: cube2
+    400008: cube3
+    400010: cube4
+    400012: cube5
+    400014: cylinder
+    400016: cylinder1
+    400018: cylinder2
+    400020: cylinder3
+    400022: Door_Atras
+    400024: Door_Retratil
+    400026: Engine
+    400028: Engine1
+    400030: hatch
+    400032: polymsh
+    400034: polymsh_detached
+    400036: polymsh_extracted
+    400038: polymsh_extracted1
+    400040: polymsh_extracted2
+    400042: polymsh_extracted3
+    400044: polymsh_extracted4
+    400046: polymsh_extracted5
+    400048: //RootNode
+    400050: Tail
+    400052: Windows
+    400054: Windows1
+    400056: Windows2
+    400058: Yellow_Engines
+    400060: Yellow_Engines1
+    400062: Yellow_Engines2
+    400064: Yellow_Engines3
+    2300000: Blue_Warp
+    2300002: cube
+    2300004: cube1
+    2300006: cube2
+    2300008: cube3
+    2300010: cube4
+    2300012: cube5
+    2300014: cylinder
+    2300016: cylinder1
+    2300018: cylinder2
+    2300020: cylinder3
+    2300022: Door_Atras
+    2300024: Door_Retratil
+    2300026: Engine
+    2300028: Engine1
+    2300030: hatch
+    2300032: polymsh
+    2300034: polymsh_detached
+    2300036: polymsh_extracted
+    2300038: polymsh_extracted1
+    2300040: polymsh_extracted2
+    2300042: polymsh_extracted3
+    2300044: polymsh_extracted4
+    2300046: polymsh_extracted5
+    2300048: Tail
+    2300050: Windows
+    2300052: Windows1
+    2300054: Windows2
+    2300056: Yellow_Engines
+    2300058: Yellow_Engines1
+    2300060: Yellow_Engines2
+    2300062: Yellow_Engines3
+    3300000: Blue_Warp
+    3300002: cube
+    3300004: cube1
+    3300006: cube2
+    3300008: cube3
+    3300010: cube4
+    3300012: cube5
+    3300014: cylinder
+    3300016: cylinder1
+    3300018: cylinder2
+    3300020: cylinder3
+    3300022: Door_Atras
+    3300024: Door_Retratil
+    3300026: Engine
+    3300028: Engine1
+    3300030: hatch
+    3300032: polymsh
+    3300034: polymsh_detached
+    3300036: polymsh_extracted
+    3300038: polymsh_extracted1
+    3300040: polymsh_extracted2
+    3300042: polymsh_extracted3
+    3300044: polymsh_extracted4
+    3300046: polymsh_extracted5
+    3300048: Tail
+    3300050: Windows
+    3300052: Windows1
+    3300054: Windows2
+    3300056: Yellow_Engines
+    3300058: Yellow_Engines1
+    3300060: Yellow_Engines2
+    3300062: Yellow_Engines3
+    4300000: Windows2
+    4300002: Windows1
+    4300004: Windows
+    4300006: hatch
+    4300008: Tail
+    4300010: Door_Atras
+    4300012: Door_Retratil
+    4300014: Engine
+    4300016: Blue_Warp
+    4300018: Yellow_Engines
+    4300020: Yellow_Engines1
+    4300022: cylinder
+    4300024: cube
+    4300026: polymsh_extracted
+    4300028: cube1
+    4300030: cube2
+    4300032: polymsh_extracted1
+    4300034: polymsh_extracted2
+    4300036: cylinder1
+    4300038: polymsh_detached
+    4300040: Engine1
+    4300042: Yellow_Engines2
+    4300044: Yellow_Engines3
+    4300046: cylinder2
+    4300048: cube3
+    4300050: polymsh_extracted3
+    4300052: polymsh_extracted4
+    4300054: cube4
+    4300056: cube5
+    4300058: polymsh_extracted5
+    4300060: cylinder3
+    4300062: polymsh
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
