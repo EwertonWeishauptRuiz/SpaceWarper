@@ -71,10 +71,11 @@ public class Spawner : MonoBehaviour {
             warpSpeedDisplay.text = "2";
             warpEmission = 90;
             warpSpeed = 35;
-            indicatorsWarp[0].SetActive(true);            
+            indicatorsWarp[0].SetActive(true);                        
             myRotation = 36f;
             insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
             animator.speed = 0.1f;
+            AnimationSpeedChange(true);
         }
         if (spawnQuantities <= 20 && spawnTimer < 0) {
             Spawn();
@@ -148,20 +149,20 @@ public class Spawner : MonoBehaviour {
             warpSpeedDisplay.text = "9";
             warpEmission = 120;
             warpSpeed = 68;
-            indicatorsWarp[7].SetActive(true);
+            //indicatorsWarp[7].SetActive(true);
             myRotation = -46f;
-            insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
+            //insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
             animator.speed = 0.8f;
         }
         if (spawnQuantities <= 90 && spawnTimer < 0) {
             Spawn();
             spawnTimer = Random.Range(.1f, .35f);
-            warpSpeedDisplay.text = "9.9";
+            //warpSpeedDisplay.text = "9.9";
             warpEmission = 125;
             warpSpeed = 70;
-            indicatorsWarp[8].SetActive(true);
+            //indicatorsWarp[8].SetActive(true);
             myRotation = -161;
-            insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
+            //insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
             animator.speed = 1;
         }
     }
@@ -182,7 +183,6 @@ public class Spawner : MonoBehaviour {
                 alphaChannel.a = 1;
                 speedChange.color = alphaChannel;
             }
-
         }
     }
 
