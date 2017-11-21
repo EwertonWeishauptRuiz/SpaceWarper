@@ -11,6 +11,8 @@ public class Asteroids : MonoBehaviour {
     Renderer mat;
 
     public Material[] mats;
+    int targetPoints = 10;
+    
     // Use this for initialization
     void Start () {
         rbd = GetComponent<Rigidbody>();
@@ -24,39 +26,31 @@ public class Asteroids : MonoBehaviour {
 
         int matIndex = Random.Range(0, mats.Length);
         mat.material = mats[matIndex];
-        
-        if (gameManager.pointCounter > 5) {
-            speed = Random.Range(100f, 250f);
-        }
-        if (gameManager.pointCounter > 20) {
-            speed = Random.Range(200f, 350f);
-        }
-        if (gameManager.pointCounter > 30) {
-            speed = Random.Range(250f, 750f);
-        }
-        if (gameManager.pointCounter > 50) {
-            speed = Random.Range(350f, 550f);
-        }
-        if (gameManager.pointCounter > 60) {
-            speed = Random.Range(500f, 700f);
-        }
-        if (gameManager.pointCounter > 70) {
-            speed = Random.Range(700f, 900f);
-        }
-        if (gameManager.pointCounter > 80) {
-            speed = Random.Range(700f, 900f);
-        }
-        if (gameManager.pointCounter > 90) {
-            speed = Random.Range(800f, 950f);
-        }
     }
 
     // Update is called once per frame
     void Update () {
+        UpdateSpeed();
         rbd.AddForce(0, 0, -speed * Time.deltaTime);
         float rotX = Random.Range(0.03f, 0.09f);
         float rotY = Random.Range(0.05f, 0.08f);
-        transform.Rotate(Time.time * rotX, Time.time * rotY, 0);        
+        transform.Rotate(Time.unscaledTime * rotX, Time.unscaledTime * rotY, 0);        
+    }
+    
+    void UpdateSpeed(){
+        float speedMin = 100;
+        float speedMax = 250;
+        
+        if(gameManager.pointCounter > targetPoints){
+            targetPoints += 10;
+            if(speedMin < 800 && speedMax < 950){
+                speedMin += 50;
+                speedMax += 50;
+                print("Stop incrementing Speed");
+            }
+            speed = Random.Range(speedMin, speedMax);
+            print("Updated Speed");
+        }    
     }
 
     void OnCollisionEnter(Collision other) {
@@ -64,4 +58,6 @@ public class Asteroids : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+    
+
 }

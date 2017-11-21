@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
         } else {
             PlayerDead();
         }
-    }
+    }     
+
     void DisplayPoints() {
         int roundPoints = Mathf.RoundToInt(points);
         pointsDisplay.text = roundPoints.ToString();
@@ -39,17 +40,17 @@ public class GameManager : MonoBehaviour
             multiplier += 0.1f;            
         }
     }
-
-    void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Asteroid") {
-            pointCounter++;            
-            points = pointCounter * multiplier * 10;
-        }
-    }
-    
+        
     void PlayerDead(){
         speedCanvas.SetActive(false);
         pointsDisplay.GetComponent<Text>().enabled = false;    
     }
-
+    
+    void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Asteroid") {
+            pointCounter++;            
+            points = pointCounter * multiplier * 10;
+            print("Should add points");
+        }
+    }
 }

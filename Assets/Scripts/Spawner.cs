@@ -26,7 +26,8 @@ public class Spawner : MonoBehaviour {
 
     Color alphaChannel;
 
-    public Animator animator;  
+    public Animator animator;
+    bool stopIncrementing = false;
 
     void Start(){
         myRotation = insideSpeedHUD.transform.rotation.z;
@@ -36,8 +37,6 @@ public class Spawner : MonoBehaviour {
         alphaChannel = speedChange.color;
         animator.speed = 0;
     }
-
-
 
     void Update () {
         AdjustWarpSpeed();
@@ -145,25 +144,28 @@ public class Spawner : MonoBehaviour {
         }
         if (spawnQuantities <= 80 && spawnTimer < 0) {
             Spawn();
-            spawnTimer = Random.Range(.1f, .35f);
+            spawnTimer = Random.Range(.2f, .45f);
             warpSpeedDisplay.text = "9";
             warpEmission = 120;
             warpSpeed = 68;
-            //indicatorsWarp[7].SetActive(true);
-            myRotation = -46f;
-            //insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
             animator.speed = 0.8f;
         }
         if (spawnQuantities <= 90 && spawnTimer < 0) {
             Spawn();
-            spawnTimer = Random.Range(.1f, .35f);
-            //warpSpeedDisplay.text = "9.9";
+            spawnTimer = Random.Range(.2f, .45f);            
             warpEmission = 125;
-            warpSpeed = 70;
-            //indicatorsWarp[8].SetActive(true);
-            myRotation = -161;
-            //insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
+            warpSpeed = 70;                        
+            animator.speed = 1;            
+            stopIncrementing = true;
+        }
+        if(stopIncrementing && spawnTimer < 0){
+            Spawn();
+            spawnTimer = Random.Range(.2f, .5f);            
+            warpEmission = 125;
+            warpSpeed = 70;            
             animator.speed = 1;
+            print("Keep Spawning brah!");
+            stopIncrementing = true;
         }
     }
 
@@ -204,7 +206,7 @@ public class Spawner : MonoBehaviour {
         emissionOrange.rateOverTime = warpEmission;
 
         if (warpSpeed <= 20 && warpEmission <= 80) {
-            warpSpeed = +Time.time * 5;
+            warpSpeed = Time.time * 5;
             warpEmission = Time.time * 15;
         }
     }
