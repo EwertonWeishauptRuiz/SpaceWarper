@@ -21,7 +21,6 @@ public class RotateObjectMenu : MonoBehaviour {
     }
 
     void Update() {
-
         if(Input.GetKeyDown(KeyCode.Space)){
             transform.eulerAngles = startRotation;
         }
@@ -34,40 +33,36 @@ public class RotateObjectMenu : MonoBehaviour {
 			w = 30 * speedKeyboard * Time.deltaTime;
 
         if(Input.GetKey(KeyCode.E))
-            w = 30 * speedKeyboard * Time.deltaTime * -1;    
+            w = 30 * speedKeyboard * Time.deltaTime * -1;   
             
         transform.Rotate(w, h,v);
         
         
         if (isRotating) {
             rotationInstructions.SetActive(false);
-            // offset
+            
             mouseOffset = (Input.mousePosition - mouseReference);
 
 			newRotation.y = -(mouseOffset.x) * sensitivity;
             newRotation.x = -mouseOffset.x * sensitivity;
             newRotation.z = -mouseOffset.y * sensitivity;
-
-            // rotate
+            
             transform.eulerAngles += newRotation;
-
-            // store mouse
+            
             mouseReference = Input.mousePosition;
         }
     }
 
     void OnMouseDown() {
         isRotating = true;
-        mouseReference = Input.mousePosition;
-        
+        mouseReference = Input.mousePosition;        
     }
 
     void OnMouseUp() {        
         isRotating = false;
     }
     
-    void OnMouseOver(){
-        print("Hey I am on the spaceship");
+    void OnMouseOver() {        
         rotationInstructions.SetActive(true);
     }
 
