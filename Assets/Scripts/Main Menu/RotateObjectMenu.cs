@@ -14,42 +14,47 @@ public class RotateObjectMenu : MonoBehaviour {
     Vector3 newRotation;
     bool isRotating;
 
+    public bool canRotate;
+
     void Start() {        
         newRotation = Vector3.zero;
         rotationInstructions.SetActive(false);
         startRotation = transform.eulerAngles;
+        canRotate = true;
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Space)){
-            transform.eulerAngles = startRotation;
-        }
-
-        float w = 0;
-        float h = Input.GetAxis("Horizontal") * speedKeyboard;
-        float v = Input.GetAxis("Vertical") * speedKeyboard;
-		
-        if (Input.GetKey(KeyCode.Q))
-			w = 30 * speedKeyboard * Time.deltaTime;
-
-        if(Input.GetKey(KeyCode.E))
-            w = 30 * speedKeyboard * Time.deltaTime * -1;   
+        if(canRotate){
+            if(Input.GetKeyDown(KeyCode.Space)){
+                transform.eulerAngles = startRotation;
+            }
+    
+            float w = 0;
+            float h = Input.GetAxis("Horizontal") * speedKeyboard;
+            float v = Input.GetAxis("Vertical") * speedKeyboard;
+    		
+            if (Input.GetKey(KeyCode.Q))
+    			w = 30 * speedKeyboard * Time.deltaTime;
+    
+            if(Input.GetKey(KeyCode.E))
+                w = 30 * speedKeyboard * Time.deltaTime * -1;   
+                
+            transform.Rotate(w, h,v);
             
-        transform.Rotate(w, h,v);
-        
-        
-        if (isRotating) {
-            rotationInstructions.SetActive(false);
             
-            mouseOffset = (Input.mousePosition - mouseReference);
-
-			newRotation.y = -(mouseOffset.x) * sensitivity;
-            newRotation.x = -mouseOffset.x * sensitivity;
-            newRotation.z = -mouseOffset.y * sensitivity;
-            
-            transform.eulerAngles += newRotation;
-            
-            mouseReference = Input.mousePosition;
+            if (isRotating) {
+                rotationInstructions.SetActive(false);
+                
+                mouseOffset = (Input.mousePosition - mouseReference);
+    
+    			newRotation.y = -(mouseOffset.x) * sensitivity;
+                newRotation.x = -mouseOffset.x * sensitivity;
+                newRotation.z = -mouseOffset.y * sensitivity;
+                
+                transform.eulerAngles += newRotation;
+                
+                mouseReference = Input.mousePosition;
+            }
         }
     }
 

@@ -5,26 +5,7 @@ using UnityEngine;
 public class HighScoreManager : MonoBehaviour {
 
     static HighScoreManager instance;
-    int leaderBoardLenght = 5;
-
-    public static HighScoreManager scoreManager {
-        get {
-        //If there is no HighScore Manager to the scene, add it.
-            if(instance == null){
-                instance = new GameObject("HighScore Manager").AddComponent<HighScoreManager>();
-            }
-            return instance;
-        }
-    }
-
-    void Awake(){
-        if(instance == null){
-            instance = this;
-        } else if (instance != this){
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-    }
+    int leaderBoardLenght = 5;    
 
     public void SaveHighScore(string name, int score) {
         List<Scores> HighScores = new List<Scores>();
@@ -62,6 +43,7 @@ public class HighScoreManager : MonoBehaviour {
                 }
             }
         }
+        print("new highscore saved");
     }
     
     public List<Scores> GetHighScore(){

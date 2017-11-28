@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector]
     public int pointCounter;
+
+    string name;
     float points;
     float multiplier = 1;
     int targetScore = 10;
@@ -17,11 +19,17 @@ public class GameManager : MonoBehaviour
     
     public Text pointsDisplay;
     PlayerMovement player;
-    GameObject speedCanvas;
+    HighScoreManager scoreManager;
+    GameObject speedCanvas;    
 
     void Start(){
+        if(name == null){
+            name = PlayerPrefs.GetString("name");
+        }
+    
         finalScore = 0;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        scoreManager = GetComponent<HighScoreManager>();
         speedCanvas = GameObject.Find("SpeedIndicator");
     }
     
@@ -50,6 +58,9 @@ public class GameManager : MonoBehaviour
         speedCanvas.SetActive(false);
         pointsDisplay.GetComponent<Text>().enabled = false;
         roundPoints = finalScore;  
+        scoreManager.SaveHighScore(name, finalScore);
+        print("DEAD BRAH");
+        print(scoreManager.GetHighScore());
     }
     
     void OnCollisionEnter(Collision other) {
