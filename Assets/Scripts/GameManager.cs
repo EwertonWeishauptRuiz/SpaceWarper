@@ -5,17 +5,22 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
+    [HideInInspector]
     public int pointCounter;
     float points;
     float multiplier = 1;
     int targetScore = 10;
+    [HideInInspector]
+    public int finalScore;
+    [HideInInspector]
+    public int roundPoints;
     
     public Text pointsDisplay;
     PlayerMovement player;
     GameObject speedCanvas;
 
     void Start(){
+        finalScore = 0;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         speedCanvas = GameObject.Find("SpeedIndicator");
     }
@@ -30,7 +35,7 @@ public class GameManager : MonoBehaviour
     }     
 
     void DisplayPoints() {
-        int roundPoints = Mathf.RoundToInt(points);
+        roundPoints = Mathf.RoundToInt(points);
         pointsDisplay.text = roundPoints.ToString();
     }
 
@@ -43,7 +48,8 @@ public class GameManager : MonoBehaviour
         
     void PlayerDead(){
         speedCanvas.SetActive(false);
-        pointsDisplay.GetComponent<Text>().enabled = false;    
+        pointsDisplay.GetComponent<Text>().enabled = false;
+        roundPoints = finalScore;  
     }
     
     void OnCollisionEnter(Collision other) {
