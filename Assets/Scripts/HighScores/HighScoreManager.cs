@@ -1,81 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+//Video reference: https://www.youtube.com/watch?v=rEGPve_8kW4
 
 public class HighScoreManager : MonoBehaviour {
 
-    static HighScoreManager instance;
-    int leaderBoardLenght = 5;    
+    public Text[] highscores;
+    string[] highscoreNames;
+    int[] highscorePoints;
+    
+    void Start(){
+        highscoreNames = new string[highscores.Length];
+        highscorePoints = new int[highscores.Length];
 
-    public void SaveHighScore(string name, int score) {
-        List<Scores> HighScores = new List<Scores>();
-
-        int i = 1;
-        while (i < leaderBoardLenght && PlayerPrefs.HasKey("HighScore" + i + "score")){
-            Scores temporary = new Scores();
-            temporary.name = PlayerPrefs.GetString("HighScore" + i + "score");
-            temporary.score = PlayerPrefs.GetInt("HighScore" + i + "name");
-            HighScores.Add(temporary);
-            i++;
+        for (int i = 0; i < highscores.Length; i++){
+            highscoreNames[i] = PlayerPrefs.GetString("HighscoreNames" + i);
+            highscorePoints[i] = PlayerPrefs.GetInt("HighscorePoints" + i);
         }
-
-        if (HighScores.Count == 0)
-        {
-            Scores temporary = new Scores();
-            temporary.name = name;
-            temporary.score = score;
-            HighScores.Add(temporary);
-        } else {
-            for (i = 1; i <= HighScores.Count && i <= leaderBoardLenght; i++){
-                if(score > HighScores[ i - 1].score){
-                    Scores temporary = new Scores();
-                    temporary.name = name;
-                    temporary.score = score;
-                    HighScores.Insert(i -1, temporary);
-                    break;
+    }
+    //Is called, is not saving
+    void SaveScores(){
+        for (int i = 0; i < highscores.Length;i++){
+            PlayerPrefs.SetString("HighscoreNames", highscoreNames[i]);
+            PlayerPrefs.SetInt("HighscorePoints", highscorePoints[i]);
+        }
+        print("Saving scores");
+    }
+    //Is called, is not saving
+    public void CheckHighScores(string name, int points){
+        for (int i = 0; i < highscores.Length;i++){
+            if(points > highscorePoints[i]){
+                for (int x = highscores.Length - 1; x > i; x--){
+                    highscoreNames[x] = highscoreNames[x - 1];
+                    highscorePoints[x] = highscorePoints[x - 1];
                 }
-                if( i == HighScores.Count && i < leaderBoardLenght){
-                    Scores temporary = new Scores();
-                    temporary.name = name;
-                    temporary.score = score;
-                    HighScores.Add(temporary);
-                    break;
-                }
+                highscorePoints[i] = points;
+                highscoreNames[i] = name;
             }
+            SaveScores();
+			DrawScore();
         }
-        print("new highscore saved");
+        print("Display HighScores");
     }
     
-    public List<Scores> GetHighScore(){
-        List<Scores> HighScores = new List<Scores>();
-
-        int i = 1;
-        while(i <= leaderBoardLenght && PlayerPrefs.HasKey("HighScores" + i + "scores")){
-            Scores temporary = new Scores();
-			temporary.name = PlayerPrefs.GetString("HighScore" + i + "name");
-            temporary.score = PlayerPrefs.GetInt("HighScore" + i + "score");
-            HighScores.Add(temporary);
-            i++;
-        }
-        return HighScores;
-    }
-
-    public void ClearLeaderBoards(){
-        List<Scores> HighScore = GetHighScore();
-
-        for (int i = 1; i <= HighScore.Count; i++){
-            PlayerPrefs.DeleteKey("HighScore" + i + "name");
-            PlayerPrefs.DeleteKey("HighScore" + i + "score");
+    void DrawScore(){
+        for (int i = 0; i < highscores.Length; i++){
+            highscores[i].text = highscoreNames[i] + ":" + highscorePoints[i];
         }
     }
 
-    void OnApplicationQuit() {
-        PlayerPrefs.Save();
-    }
-    
-    //Nested Class. 
-    public class Scores {
-        public int score;
-        public string name;        
-    }
 }

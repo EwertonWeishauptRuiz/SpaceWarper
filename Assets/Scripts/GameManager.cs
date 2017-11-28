@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     public Text pointsDisplay;
     PlayerMovement player;
     HighScoreManager scoreManager;
-    GameObject speedCanvas;    
+    GameObject speedCanvas;
+    public GameObject highscoreHolder;
 
     void Start(){
         if(name == null){
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         scoreManager = GetComponent<HighScoreManager>();
         speedCanvas = GameObject.Find("SpeedIndicator");
+        highscoreHolder.SetActive(false);    
     }
     
     void Update() {
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
 			DisplayPoints();
 			Multipliers();         
         } else {
-            PlayerDead();
+            PlayerDead(roundPoints);
         }
     }     
 
@@ -54,13 +56,12 @@ public class GameManager : MonoBehaviour
         }
     }
         
-    void PlayerDead(){
+    void PlayerDead(int points){
         speedCanvas.SetActive(false);
-        pointsDisplay.GetComponent<Text>().enabled = false;
-        roundPoints = finalScore;  
-        scoreManager.SaveHighScore(name, finalScore);
-        print("DEAD BRAH");
-        print(scoreManager.GetHighScore());
+        pointsDisplay.GetComponent<Text>().enabled = false;        
+        print("Score is " + points + " and the player is " + PlayerPrefs.GetString("PlayerName"));
+		highscoreHolder.SetActive(true);
+        scoreManager.CheckHighScores(PlayerPrefs.GetString("PlayerName"), finalScore); 
     }
     
     void OnCollisionEnter(Collision other) {

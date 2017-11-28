@@ -62,8 +62,7 @@ public class PlayerName : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void SavePlayerName() {
         PlayerPrefs.SetString("PlayerName", newName);
         if (storedName != newName) {
-            storedName = newName;
-            print("new name has been set");
+            storedName = newName;            
         }
     }
 
