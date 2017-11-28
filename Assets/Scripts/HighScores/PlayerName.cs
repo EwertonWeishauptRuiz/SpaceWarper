@@ -25,6 +25,7 @@ public class PlayerName : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         input = inputFiled.GetComponent<InputField>();
         input.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
         rotateObject = GameObject.Find("ShipHolder").GetComponent<RotateObjectMenu>();
+        storedName = "Choose Your name";
     }
 
     // Update is called once per frame
@@ -44,9 +45,6 @@ public class PlayerName : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
 
     void GetName() {
-        if (storedName == null) {
-            storedName = PlayerPrefs.GetString("PlayerName");
-        }
         nameText.text = storedName;
         rotateObject.canRotate = true;
     }
