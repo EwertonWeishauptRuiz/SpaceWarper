@@ -11,13 +11,13 @@ public class HighScoreManager : MonoBehaviour {
     
     void Start(){
         highscoreNames = new string[highscores.Length];
-        highscorePoints = new int[highscores.Length];
+        highscorePoints = new int[highscores.Length];    
 
         //Initialize a Leaderboard
-        for (int i = 0; i < highscores.Length; i++) {
-            PlayerPrefs.SetString("HighscoreNames" + i, "a" + i.ToString());
-            PlayerPrefs.SetInt("HighscorePoints" + i, i * 10);
-        }
+        //for (int i = 0; i < highscores.Length; i++) {            
+        //    PlayerPrefs.SetString("HighscoreNames" + i, "a" + i.ToString());
+        //    PlayerPrefs.SetInt("HighscorePoints" + i, i * 10);
+        //}
 
         for (int i = 0; i < highscores.Length; i++) {
             highscoreNames[i] = PlayerPrefs.GetString("HighscoreNames" + i);
@@ -33,7 +33,7 @@ public class HighScoreManager : MonoBehaviour {
             PlayerPrefs.Save();
         }       
     }
-    //Is called, is not saving
+    
     public void CheckHighScores(string name, int points){
         for (int x = 0; x < highscores.Length; x++) {
             //Find out if it is higher than any other score.
@@ -53,15 +53,14 @@ public class HighScoreManager : MonoBehaviour {
                 SaveScores();
                 DebugScores();
                 break;                
-            } else {
-                DrawScore();
-            }            
-        }                
+            }          
+        } 
+        DrawScore();               
     }
     
     void DrawScore(){
         for (int i = 0; i < highscores.Length; i++){
-            highscores[i].text = highscoreNames[i] + " : " + highscorePoints[i].ToString();
+            highscores[i].text = highscoreNames[i] + "  -  " + highscorePoints[i].ToString();
         }
     }
 
@@ -71,5 +70,4 @@ public class HighScoreManager : MonoBehaviour {
             Debug.LogWarning("Highscore " + i + " is : " + PlayerPrefs.GetInt("HighscorePoints" + i) + " from player : " + PlayerPrefs.GetString("HighscoreNames" + i));
         }
     }
-
 }

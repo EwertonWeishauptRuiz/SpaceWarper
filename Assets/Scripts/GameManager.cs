@@ -17,12 +17,14 @@ public class GameManager : MonoBehaviour
     HighScoreManager scoreManager;
     GameObject speedCanvas;
     public GameObject highscoreHolder;
+    bool highscoreChecked;
 
     void Start() {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         scoreManager = GetComponent<HighScoreManager>();
         speedCanvas = GameObject.Find("SpeedIndicator");
-        highscoreHolder.SetActive(false);    
+        highscoreHolder.SetActive(false);
+        highscoreChecked = false; 
     }
     
     void Update() {
@@ -50,7 +52,10 @@ public class GameManager : MonoBehaviour
         speedCanvas.SetActive(false);
         pointsDisplay.GetComponent<Text>().enabled = false;        
 		highscoreHolder.SetActive(true);
-        scoreManager.CheckHighScores(PlayerPrefs.GetString("PlayerName"), points);
+        if (!highscoreChecked) {
+            scoreManager.CheckHighScores(PlayerPrefs.GetString("PlayerName"), points);
+            highscoreChecked = true;
+        }
     }
     
     void OnCollisionEnter(Collision other) {

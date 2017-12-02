@@ -74,7 +74,8 @@ public class PlayerName : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerClick(PointerEventData eventData) {
         inputFiled.SetActive(true);
-        inputActive = true;        
+        inputActive = true;
+        input.characterLimit = 15;      
     }
     
     void ValueChangeCheck(){
