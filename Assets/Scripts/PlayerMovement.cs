@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour {
 
     Rigidbody rbd;
     public int thrust = 1000;
-    public bool dead = false;
-    public int asteroidDamage;
+    public bool dead = false;    
+    public int blasterDamage;
     float h, v;
     float range = 100;
     public int blasterCount;
@@ -19,14 +19,21 @@ public class PlayerMovement : MonoBehaviour {
     public LayerMask collisionMask;
     Vector3 shootOriginPosition;
 
-    public Text blasterCountText;
+    public Text blasterCountText, blasterEfficiency;
+    public GameObject pickupText;
+	Text pickupTextString;
+
+    public Color[] colors;
 
     public bool godMode;
 	// Use this for initialization
-	void Start () {        
+	void Start () {
+        blasterDamage = 25;     
         blaster.Stop();
+        pickupText.SetActive(false);        
         rbd = GetComponent<Rigidbody>();
-        cam = Camera.main;        
+        cam = Camera.main;
+        pickupTextString = pickupText.GetComponent<Text>();        
     }
 
     // Update is called once per frame
@@ -37,51 +44,86 @@ public class PlayerMovement : MonoBehaviour {
         rbd.AddForce(h, v, 0);  
         
         RotateShip();
-        Shoot();
-    
+        Shoot();    
 		UI(); 
+        DamageMultiplier();  
     }
     
-    void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Asteroid" && !godMode) {
-            print("Game Over");
-            Destroy(gameObject);
-            dead = true;
-        }
-        if (godMode){
-            Physics.IgnoreLayerCollision(0,9,true);
-        }
-    }
     
-    void Shoot(){   
+	void Shoot(){   
         if(Input.GetButtonDown("Fire1") && blasterCount > 0){            
-			blaster.Play();
+            blaster.Play();
             blasterCount--;
             RaycastHit hit;
             if(Physics.Raycast(shootOriginPosition, shootOrigin.right * range, out hit, range, collisionMask)){
                 Asteroids asteroids = hit.transform.GetComponent<Asteroids>();
                 if(asteroids != null){
-                    asteroids.TakeHit(asteroidDamage);
+                    asteroids.TakeHit(blasterDamage);
                 }                
             }
         }
     }
     
     void RotateShip(){
-		if (h < 0) {            
-			transform.rotation = Quaternion.Euler(15,-90, 0);
-		} else if (h > 0) {            
-			transform.rotation = Quaternion.Euler(-15, -90, 0);
-		} else if (v > 0) {            
-			transform.rotation = Quaternion.Euler(0, -90, 15);
-		} else if (v < 0) {            
-			transform.rotation = Quaternion.Euler(0, -90, -15);
-		} else {
-			transform.rotation = Quaternion.Euler(0,-90,0);
-		}
+        if (h < 0) {            
+            transform.rotation = Quaternion.Euler(15,-90, 0);
+        } else if (h > 0) {            
+            transform.rotation = Quaternion.Euler(-15, -90, 0);
+        } else if (v > 0) {            
+            transform.rotation = Quaternion.Euler(0, -90, 15);
+        } else if (v < 0) {            
+            transform.rotation = Quaternion.Euler(0, -90, -15);
+        } else {
+            transform.rotation = Quaternion.Euler(0,-90,0);
+        }
     }
     
     void UI(){
         blasterCountText.text = "Blasters: " + blasterCount.ToString();
+        blasterEfficiency.text = "Blaster Efficiency at: " + blasterDamage.ToString() + "%";
+    }
+	
+    IEnumerator PickUpUI(GameObject go, Text textUI, string text, float timer){
+        go.SetActive(true);
+        textUI.text = text;
+        yield return new WaitForSeconds(timer);
+        go.SetActive(false);
+    }
+    
+    void OnCollisionEnter(Collision other) {
+		if (other.gameObject.tag == "Asteroid" && !godMode) {
+			print("Game Over");
+			Destroy(gameObject);
+			dead = true;
+		}
+		if (godMode){
+			Physics.IgnoreLayerCollision(0,9,true);
+		}
+	}
+    
+    void OnTriggerEnter(Collider other){
+        if (other.gameObject.tag == "AmmoCrate") {
+			blasterCount += 10;            
+            StartCoroutine(PickUpUI(pickupText, pickupTextString, "+10 Blasters", 2));       
+        }        
+    }
+    
+    void DamageMultiplier(){
+		if (blasterCount < 20) {
+			blasterDamage = 25;
+            blasterEfficiency.color = colors[0];
+		}
+        if(blasterCount > 20){
+            blasterDamage = 50;
+            blasterEfficiency.color = colors[1];
+        } 
+        if (blasterCount > 30){
+            blasterDamage = 75;     
+            blasterEfficiency.color = colors[2];
+        } 
+        if (blasterCount > 40){
+            blasterDamage = 100;
+            blasterEfficiency.color = colors[3];
+        }         
     }
 }

@@ -65,6 +65,7 @@ public class Asteroids : MonoBehaviour {
         health -= damage;
         if(health <= 0){
             Debug.LogWarning("Asteroid Destroyed");
+			gameManager.AsteroidDestroyed(10);
             Destroy(gameObject);
         }
     }

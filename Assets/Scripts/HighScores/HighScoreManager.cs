@@ -19,12 +19,12 @@ public class HighScoreManager : MonoBehaviour {
         //    PlayerPrefs.SetInt("HighscorePoints" + i, i * 10);
         //}
 
-        //Print HighScores in the beginning
-        //for (int i = 0; i < highscores.Length; i++) {
-        //    highscoreNames[i] = PlayerPrefs.GetString("HighscoreNames" + i);
-        //    highscorePoints[i] = PlayerPrefs.GetInt("HighscorePoints" + i);
-        //    print("Highscore " + i + " is : " + PlayerPrefs.GetInt("HighscorePoints" + i) + " from player : " + PlayerPrefs.GetString("HighscoreNames" + i));
-        //}        
+        
+        for (int i = 0; i < highscores.Length; i++) {
+            highscoreNames[i] = PlayerPrefs.GetString("HighscoreNames" + i);
+            highscorePoints[i] = PlayerPrefs.GetInt("HighscorePoints" + i);
+            //print("Highscore " + i + " is : " + PlayerPrefs.GetInt("HighscorePoints" + i) + " from player : " + PlayerPrefs.GetString("HighscoreNames" + i));
+        }        
     }
 
     void SaveScores(){

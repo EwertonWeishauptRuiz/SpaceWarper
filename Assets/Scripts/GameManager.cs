@@ -48,14 +48,18 @@ public class GameManager : MonoBehaviour
         }
     }
         
-    void PlayerDead(int points){
+    void PlayerDead(int playerPoints){
         speedCanvas.SetActive(false);
         pointsDisplay.GetComponent<Text>().enabled = false;        
 		highscoreHolder.SetActive(true);
         if (!highscoreChecked) {
-            scoreManager.CheckHighScores(PlayerPrefs.GetString("PlayerName"), points);
+            scoreManager.CheckHighScores(PlayerPrefs.GetString("PlayerName"), playerPoints);
             highscoreChecked = true;
         }
+    }
+    
+    public void AsteroidDestroyed(int addPoints){
+        points += addPoints;
     }
     
     void OnCollisionEnter(Collision other) {
