@@ -19,11 +19,12 @@ public class HighScoreManager : MonoBehaviour {
         //    PlayerPrefs.SetInt("HighscorePoints" + i, i * 10);
         //}
 
-        for (int i = 0; i < highscores.Length; i++) {
-            highscoreNames[i] = PlayerPrefs.GetString("HighscoreNames" + i);
-            highscorePoints[i] = PlayerPrefs.GetInt("HighscorePoints" + i);
-            print("Highscore " + i + " is : " + PlayerPrefs.GetInt("HighscorePoints" + i) + " from player : " + PlayerPrefs.GetString("HighscoreNames" + i));
-        }        
+        //Print HighScores in the beginning
+        //for (int i = 0; i < highscores.Length; i++) {
+        //    highscoreNames[i] = PlayerPrefs.GetString("HighscoreNames" + i);
+        //    highscorePoints[i] = PlayerPrefs.GetInt("HighscorePoints" + i);
+        //    print("Highscore " + i + " is : " + PlayerPrefs.GetInt("HighscorePoints" + i) + " from player : " + PlayerPrefs.GetString("HighscoreNames" + i));
+        //}        
     }
 
     void SaveScores(){
@@ -50,8 +51,7 @@ public class HighScoreManager : MonoBehaviour {
                 highscorePoints[x] = points;
                 //Display and save new HighScores
                 DrawScore();
-                SaveScores();
-                DebugScores();
+                SaveScores();                
                 break;                
             }          
         } 
@@ -61,13 +61,6 @@ public class HighScoreManager : MonoBehaviour {
     void DrawScore(){
         for (int i = 0; i < highscores.Length; i++){
             highscores[i].text = highscoreNames[i] + "  -  " + highscorePoints[i].ToString();
-        }
-    }
-
-    void DebugScores() {
-        for (int i = 0; i < highscores.Length; i++) {
-            Debug.LogErrorFormat("Debugger was called " + i + " times");
-            Debug.LogWarning("Highscore " + i + " is : " + PlayerPrefs.GetInt("HighscorePoints" + i) + " from player : " + PlayerPrefs.GetString("HighscoreNames" + i));
         }
     }
 }
