@@ -194,7 +194,7 @@ public class Spawner : MonoBehaviour {
 
     void SpawnAmmoCrate() {
         Transform spawnPoint = spawnSpaces[Random.Range(0, spawnSpaces.Length)];
-        Instantiate(ammoCrate, spawnPoint.position, Quaternion.identity);
+        Instantiate(ammoCrate, spawnPoint.position, Quaternion.Euler(90,0,180));
     }
     
 

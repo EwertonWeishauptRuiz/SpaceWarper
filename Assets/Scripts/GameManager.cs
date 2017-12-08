@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int pointCounter;
     float points;
+    int totalPoints;
+    int asteroidPoints;
     float multiplier = 1;
     [HideInInspector]
     public int roundPoints;
@@ -18,13 +20,15 @@ public class GameManager : MonoBehaviour
     GameObject speedCanvas;
     public GameObject highscoreHolder;
     bool highscoreChecked;
+    bool asteroidDestroyed;
 
     void Start() {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         scoreManager = GetComponent<HighScoreManager>();
         speedCanvas = GameObject.Find("SpeedIndicator");
         highscoreHolder.SetActive(false);
-        highscoreChecked = false; 
+        highscoreChecked = false;
+        asteroidDestroyed = false;
     }
     
     void Update() {
@@ -32,13 +36,18 @@ public class GameManager : MonoBehaviour
 			DisplayPoints();
 			Multipliers();         
         } else {
-            PlayerDead(roundPoints);
+            PlayerDead(totalPoints);
+        }
+        if(asteroidDestroyed){
+            points += 10;
+            asteroidDestroyed = false;
         }
     }     
 
-    void DisplayPoints() {
+    void DisplayPoints() {    
         roundPoints = Mathf.RoundToInt(points);
-        pointsDisplay.text = roundPoints.ToString();
+        totalPoints = roundPoints + asteroidPoints;
+        pointsDisplay.text = totalPoints.ToString();
     }
 
     void Multipliers(){
@@ -59,7 +68,7 @@ public class GameManager : MonoBehaviour
     }
     
     public void AsteroidDestroyed(int addPoints){
-        points += addPoints;
+        asteroidPoints += addPoints;
     }
     
     void OnCollisionEnter(Collision other) {
