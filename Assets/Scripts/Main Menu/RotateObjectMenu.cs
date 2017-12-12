@@ -14,7 +14,7 @@ public class RotateObjectMenu : MonoBehaviour {
     Vector3 newRotation;
     bool isRotating;
 
-    public bool canRotate;
+    public bool canRotate;   
 
     void Start() {        
         newRotation = Vector3.zero;

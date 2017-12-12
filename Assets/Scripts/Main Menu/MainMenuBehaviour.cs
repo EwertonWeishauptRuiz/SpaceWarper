@@ -5,10 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuBehaviour : MonoBehaviour {
 
+    RotateObjectMenu rotateObject;
+
     public GameObject creditsCanvas;
+    public GameObject optionsCanvas;
+
+    bool active;
     
+
     void Start(){
         creditsCanvas.SetActive(false);
+        optionsCanvas.SetActive(false);
+        rotateObject = GameObject.Find("ShipHolder").GetComponent<RotateObjectMenu>();
+    }
+
+    void Update() {
+        if (active) {
+            rotateObject.canRotate = false;            
+        } else {
+            rotateObject.canRotate = true;
+        }
     }
 
 	public void StartGame(){
@@ -17,17 +33,18 @@ public class MainMenuBehaviour : MonoBehaviour {
     }
     
     public void Options(){
-        print("Options");
+        optionsCanvas.SetActive(true);
+        active = true;
     }
     
     public void Credits(){
         creditsCanvas.SetActive(true);
-        print("OpenCredits");
+        active = true;
     }
     
     public void CloseCredits(){
         creditsCanvas.SetActive(false);
-        print("CloseCredits");
+        active = false;
     }
     
     public void ExitGame(){

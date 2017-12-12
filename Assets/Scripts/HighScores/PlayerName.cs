@@ -50,8 +50,7 @@ public class PlayerName : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
 
     void GetName() {
-        nameText.text = storedName;
-        rotateObject.canRotate = true;
+        nameText.text = storedName;        
     }
 
 	public void GetText(){
@@ -71,7 +70,6 @@ public class PlayerName : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData) {
         nameInstructions.SetActive(true);
-        print(name);
     }
     
     public void OnPointerExit(PointerEventData eventData) {
