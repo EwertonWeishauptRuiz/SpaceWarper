@@ -13,8 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public int blasterCount;
 
     public ParticleSystem blaster;
-
-    Camera cam;
+    
     public Transform shootOrigin;
     public LayerMask collisionMask;
     Vector3 shootOriginPosition;
@@ -31,8 +30,7 @@ public class PlayerMovement : MonoBehaviour {
         blasterDamage = 25;     
         blaster.Stop();
         pickupText.SetActive(false);        
-        rbd = GetComponent<Rigidbody>();
-        cam = Camera.main;
+        rbd = GetComponent<Rigidbody>();        
         pickupTextString = pickupText.GetComponent<Text>();        
     }
 

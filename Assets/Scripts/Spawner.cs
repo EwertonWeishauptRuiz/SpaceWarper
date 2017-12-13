@@ -7,8 +7,7 @@ public class Spawner : MonoBehaviour {
 
     public GameObject asteroid, ammoCrate;   
     public Transform[] spawnSpaces;
-    float asteroidSpawnTimer = .5f;
-    float ammoCrateSpawnTimer = 2f;
+    float asteroidSpawnTimer = .5f;    
     public Text warpSpeedDisplay;
     public GameObject[] indicatorsWarp;
     public GameObject insideSpeedHUD;

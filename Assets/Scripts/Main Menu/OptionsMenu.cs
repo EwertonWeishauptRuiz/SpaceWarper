@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour {
 
-    public AudioMixer audio;
+    public AudioMixer audioVolume;
     public Dropdown resDropdown;
     Resolution[] resolutions;
 
@@ -22,15 +22,13 @@ public class OptionsMenu : MonoBehaviour {
                 currentResolutionIndex = i;
             }
         }
-
         resDropdown.AddOptions(resolutionOptions);
         resDropdown.value = currentResolutionIndex;
         resDropdown.RefreshShownValue();
     }
 
     public void VolumeSetting(float volume) {
-        audio.SetFloat("MainVolume", volume);
-        Debug.Log(volume);
+        audioVolume.SetFloat("MainVolume", volume);        
     }
 
     public void QualitySetting(int qualityIndex) {
