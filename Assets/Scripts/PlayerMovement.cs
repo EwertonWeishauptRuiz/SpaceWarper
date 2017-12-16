@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class PlayerMovement : MonoBehaviour {
 
     Rigidbody rbd;
@@ -11,6 +12,8 @@ public class PlayerMovement : MonoBehaviour {
     float h, v;
     float range = 100;
     public int blasterCount;
+
+    public GameObject mainCamera;
 
     public ParticleSystem blaster;
     
@@ -31,7 +34,8 @@ public class PlayerMovement : MonoBehaviour {
         blaster.Stop();
         pickupText.SetActive(false);        
         rbd = GetComponent<Rigidbody>();        
-        pickupTextString = pickupText.GetComponent<Text>();        
+        pickupTextString = pickupText.GetComponent<Text>();
+           
     }
 
     // Update is called once per frame

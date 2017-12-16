@@ -4,11 +4,21 @@
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_TintColor("Texture", color) = (1,1,1,1) 
+		_Transparency("Transparency", Range(0.0, 0.5)) = 0.25
+		_CutoutThresh("Cutout Threshold", Range(0.0, 1.0)) = 0.2
+		_Distance("Distance", float) = 1
+		_Amplitude("Amplitude", float) = 1
+		_Speed("Speed", float) = 1
+		_Amount("Amount", float) = 1
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" }
+		//Queue Transparent to render last than anything else, just before Overlay on the render queue.
+		Tags { "Queue"="Transparent" "RenderType"="Transparent" }
 		LOD 100
+
+		ZWrite Off
+		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{
@@ -36,22 +46,33 @@
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float4 _TintColor;
+			float _Transparency;
+			float _CutoutThresh;
+			float _Distance;
+			float _Amplitude;
+			float _Speed;
+			float _Amount;
+
 			
 			v2f vert (appdata v)
 			{
 				v2f o;
+				//_Time.y comes from unity as a float 4. y is the time in seconds.
+				//Same as Time.time
+				v.vertex.x += sin(_Time.y * _Speed + v.vertex.y * _Amplitude) * _Distance * _Amount;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				UNITY_TRANSFER_FOG(o,o.vertex);
+				o.uv = TRANSFORM_TEX(v.uv, _MainTex);				
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
 				// sample the texture
-				fixed4 col = tex2D(_MainTex, i.uv) * _TintColor;
-				// apply fog
-				UNITY_APPLY_FOG(i.fogCoord, col);
+				//If do not wanted to multiply change the + sing to *
+				fixed4 col = tex2D(_MainTex, i.uv) + _TintColor;
+				col.a = _Transparency;
+				//Cut out the amount of red.
+				clip(col.r - _CutoutThresh);
 				return col;
 			}
 			ENDCG
