@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     float range = 100;
     public int blasterCount;
 
-    public GameObject mainCamera;
+    public GameObject mainCameram, hitParticle;
 
     public ParticleSystem blaster;
     
@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject pickupText;
 	Text pickupTextString;
 
+    GameObject[] shipComponents;
+
     public Color[] colors;
 
     public bool godMode;
@@ -35,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         pickupText.SetActive(false);        
         rbd = GetComponent<Rigidbody>();        
         pickupTextString = pickupText.GetComponent<Text>();
-           
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -48,18 +50,26 @@ public class PlayerMovement : MonoBehaviour {
         RotateShip();
         Shoot();    
 		UI(); 
-        DamageMultiplier();  
+        DamageMultiplier();
+
+        if (godMode) {
+            Physics.IgnoreLayerCollision(0, 9, true);
+        } else {
+            Physics.IgnoreLayerCollision(0, 9, false);
+        }
     }
     
     
 	void Shoot(){   
-        if(Input.GetButtonDown("Fire1") && blasterCount > 0){            
+        if(Input.GetButtonDown("Fire1") && blasterCount > 0){
+            //Blaster Particle play
             blaster.Play();
             blasterCount--;
             RaycastHit hit;
             if(Physics.Raycast(shootOriginPosition, shootOrigin.right * range, out hit, range, collisionMask)){
                 Asteroids asteroids = hit.transform.GetComponent<Asteroids>();
                 if(asteroids != null){
+                    Instantiate(hitParticle, hit.transform.position, Quaternion.identity);
                     asteroids.TakeHit(blasterDamage);
                 }                
             }
@@ -97,9 +107,7 @@ public class PlayerMovement : MonoBehaviour {
 			print("Game Over");
 			Destroy(gameObject);
 			dead = true;
-		}
-		if (godMode){
-			Physics.IgnoreLayerCollision(0,9,true);
+            Time.timeScale = 0;            
 		}
 	}
     
@@ -107,25 +115,38 @@ public class PlayerMovement : MonoBehaviour {
         if (other.gameObject.tag == "AmmoCrate") {
 			blasterCount += 10;            
             StartCoroutine(PickUpUI(pickupText, pickupTextString, "+10 Blasters", 2));       
-        }        
+        }      
+        if(other.gameObject.tag == "HologramCrate") {
+            print("Got the HoloCrate");
+            StartCoroutine("GodMode");
+            StartCoroutine(PickUpUI(pickupText, pickupTextString, "5 Seconds Invulnerability", 2));
+        }
     }
     
+    IEnumerator GodMode() {        
+        godMode = true;
+        yield return new WaitForSeconds(5.2f);
+        godMode = false;        
+    }
+
     void DamageMultiplier(){
-		if (blasterCount < 20) {
-			blasterDamage = 25;
-            blasterEfficiency.color = colors[0];
-		}
-        if(blasterCount > 20){
-            blasterDamage = 50;
-            blasterEfficiency.color = colors[1];
-        } 
-        if (blasterCount > 30){
-            blasterDamage = 75;     
-            blasterEfficiency.color = colors[2];
-        } 
-        if (blasterCount > 40){
+        if(blasterCount == 0) {
+            blasterCountText.color = Color.red;
+        } else {
+            blasterCountText.color = Color.white;
+        }
+        if (blasterCount > 40) {
             blasterDamage = 100;
+            blasterEfficiency.color = colors[0];
+        } else if (blasterCount > 30) {
+            blasterDamage = 75;
+            blasterEfficiency.color = colors[1];
+        } else if (blasterCount > 20) {
+            blasterDamage = 50;
+            blasterEfficiency.color = colors[2];
+        } else {
+            blasterDamage = 25;
             blasterEfficiency.color = colors[3];
-        }         
+        }
     }
 }

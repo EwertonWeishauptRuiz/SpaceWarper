@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
 
-    public GameObject asteroid, ammoCrate;   
+    public GameObject asteroid, ammoCrate, hologramCrate;   
     public Transform[] spawnSpaces;
     float asteroidSpawnTimer = .5f;    
     public Text warpSpeedDisplay;
@@ -14,10 +14,9 @@ public class Spawner : MonoBehaviour {
 
     int spawnQuantities;
     float myRotation;
-
-    public Image speedChange;
+        
     public ParticleSystem warpBlue, warpOrange;
-    public float warpSpeed, warpEmission = 1;
+    float warpSpeed, warpEmission = 1;
 
     Color alphaChannel;
 
@@ -28,18 +27,18 @@ public class Spawner : MonoBehaviour {
         myRotation = insideSpeedHUD.transform.rotation.z;
         myRotation = -297.93f;
         insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
-        warpSpeedDisplay.text = "1";
-        alphaChannel = speedChange.color;
+        warpSpeedDisplay.text = "1";        
         animator.speed = 0;
 		//After 2 seconds of game spawn an ammo crate every 8 seconds.
         InvokeRepeating("SpawnAmmoCrate", 2f, 8f);
+        //After 10 seconds of game spawn an Hologram Crate, every 22.5 seconds.
+        InvokeRepeating("SpawnHologramCrate", 11f, 22.5f);
     }
 
     void Update () {
         AdjustWarpSpeed();
         GameSpawner();      
-        asteroidSpawnTimer -= Time.deltaTime;
-        AnimationSpeedChange(true);
+        asteroidSpawnTimer -= Time.deltaTime;        
     }
 
     void GameSpawner() {
@@ -70,8 +69,7 @@ public class Spawner : MonoBehaviour {
             indicatorsWarp[0].SetActive(true);                        
             myRotation = 36f;
             insideSpeedHUD.transform.rotation = Quaternion.Euler(0, 0, myRotation);
-            animator.speed = 0.1f;
-            AnimationSpeedChange(true);
+            animator.speed = 0.1f;            
         }
         if (spawnQuantities <= 20 && asteroidSpawnTimer < 0) {
             SpawnAsteroid();
@@ -160,30 +158,10 @@ public class Spawner : MonoBehaviour {
             asteroidSpawnTimer = Random.Range(.2f, .5f);            
             warpEmission = 125;
             warpSpeed = 70;            
-            animator.speed = 1;
-            print("Keep Spawning brah!");
+            animator.speed = 1;            
             stopIncrementing = true;
         }
-    }
-
-    void AnimationSpeedChange(bool play){
-        Vector3 myScale = speedChange.transform.localScale;       
-        alphaChannel.a = 1;
-        if (play) {            
-            alphaChannel.a -= -0.3f + Time.time * 1.8f;
-            speedChange.color = alphaChannel;            
-            myScale = new Vector3(0 + Time.time * 3,
-                                  0 + Time.time * 3,
-                                  0 + Time.time * 3);
-            if (speedChange.transform.localScale.x <= 1.2f)
-                speedChange.transform.localScale = myScale;
-            else {
-                speedChange.transform.localScale = new Vector3(0, 0, 0);
-                alphaChannel.a = 1;
-                speedChange.color = alphaChannel;
-            }
-        }
-    }
+    }   
 
     void SpawnAsteroid() {
         Transform spawnPoint = spawnSpaces[Random.Range(0, spawnSpaces.Length)];
@@ -194,8 +172,12 @@ public class Spawner : MonoBehaviour {
     void SpawnAmmoCrate() {
         Transform spawnPoint = spawnSpaces[Random.Range(0, spawnSpaces.Length)];
         Instantiate(ammoCrate, spawnPoint.position, Quaternion.Euler(90,0,180));
+    }    
+
+    void SpawnHologramCrate() {
+        Transform spawnPoint = spawnSpaces[Random.Range(0, spawnSpaces.Length)];
+        Instantiate(hologramCrate, spawnPoint.position, Quaternion.Euler(90, 0, 180));
     }
-    
 
     void AdjustWarpSpeed() {
         var mainBlue = warpBlue.main;
@@ -209,8 +191,8 @@ public class Spawner : MonoBehaviour {
         emissionOrange.rateOverTime = warpEmission;
 
         if (warpSpeed <= 20 && warpEmission <= 80) {
-            warpSpeed = Time.time * 5;
-            warpEmission = Time.time * 15;
+            warpSpeed = Time.timeSinceLevelLoad * 5;
+            warpEmission = Time.timeSinceLevelLoad * 15;
         }
     }
 }

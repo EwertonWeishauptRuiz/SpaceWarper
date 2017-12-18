@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlasterCrate : MonoBehaviour {
+public class Crate : MonoBehaviour {
 
     float speed;
     Rigidbody rbd;
@@ -18,7 +18,7 @@ public class BlasterCrate : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider other) {
-        if(other.gameObject.tag == "Player"){
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Kill"){
             Destroy(gameObject);            
         }
     }

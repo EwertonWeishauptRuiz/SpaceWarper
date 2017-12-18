@@ -10,12 +10,14 @@ public class Asteroids : MonoBehaviour {
     GameManager gameManager;
     Renderer mat;
     int health;
+    public GameObject hitParticle;
 
     public Material[] mats;
     int targetPoints = 10;
     
     // Use this for initialization
     void Start () {
+        //hitParticle.Stop();
 		health = 100;
         rbd = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -62,12 +64,14 @@ public class Asteroids : MonoBehaviour {
     }
     
     public void TakeHit(int damage){
+        //hitParticle.Play();
+        //Instantiate(hitParticle, transform.position, Quaternion.identity);
         health -= damage;
-        if(health <= 0){
-            Debug.LogWarning("Asteroid Destroyed");
+        if(health <= 0){            
 			gameManager.AsteroidDestroyed(10);
             Destroy(gameObject);
         }
     }
+
 
 }

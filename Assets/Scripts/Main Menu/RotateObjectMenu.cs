@@ -60,19 +60,19 @@ public class RotateObjectMenu : MonoBehaviour {
 
     void OnMouseDown() {
         isRotating = true;
-        mouseReference = Input.mousePosition;        
+        mouseReference = Input.mousePosition;
     }
 
-    void OnMouseUp() {        
+    void OnMouseUp() {
         isRotating = false;
     }
-    
-    void OnMouseOver() {        
+
+    void OnMouseOver() {
         rotationInstructions.SetActive(true);
     }
 
     void OnMouseExit() {
-        rotationInstructions.SetActive(false);    
+        rotationInstructions.SetActive(false);
     }
 
 }

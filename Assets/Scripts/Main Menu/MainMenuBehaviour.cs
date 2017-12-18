@@ -47,7 +47,6 @@ public class MainMenuBehaviour : MonoBehaviour {
     
     public void CloseCredits() {
         creditsCanvas.SetActive(false);
-        optionsCanvas.SetActive(false);
         active = false;
     }
 
