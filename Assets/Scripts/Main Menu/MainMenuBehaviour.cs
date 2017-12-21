@@ -27,7 +27,7 @@ public class MainMenuBehaviour : MonoBehaviour {
     }
 
 	public void StartGame(){
-        SceneManager.LoadScene("Set-UP");        
+        SceneManager.LoadScene("Game");        
     }
     
     public void Options(){

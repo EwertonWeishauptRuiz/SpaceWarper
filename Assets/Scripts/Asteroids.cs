@@ -13,11 +13,9 @@ public class Asteroids : MonoBehaviour {
     public GameObject hitParticle;
 
     public Material[] mats;
-    int targetPoints = 10;
+    int targetPoints = 10;  
     
-    // Use this for initialization
-    void Start () {
-        //hitParticle.Stop();
+    void Start () {        
 		health = 100;
         rbd = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -27,7 +25,7 @@ public class Asteroids : MonoBehaviour {
         sizeZ = Random.Range(1f, 2f);
         transform.localScale = new Vector3(sizeX, sizeY, sizeZ);
         speed = Random.Range(80f, 120f);
-
+        
         int matIndex = Random.Range(0, mats.Length);
         mat.material = mats[matIndex];
     }
@@ -64,14 +62,11 @@ public class Asteroids : MonoBehaviour {
     }
     
     public void TakeHit(int damage){
-        //hitParticle.Play();
-        //Instantiate(hitParticle, transform.position, Quaternion.identity);
         health -= damage;
         if(health <= 0){            
 			gameManager.AsteroidDestroyed(10);
             Destroy(gameObject);
+
         }
     }
-
-
 }

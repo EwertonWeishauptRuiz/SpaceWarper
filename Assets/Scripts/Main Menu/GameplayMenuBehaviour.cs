@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameplayMenuBehaviour : MonoBehaviour {
 
 	public void RestartGame() {
-        SceneManager.LoadScene("Set-UP");
+        SceneManager.LoadScene("Game");
         print("Restart");
     }
 

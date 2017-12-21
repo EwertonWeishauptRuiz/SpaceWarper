@@ -13,9 +13,13 @@ public class PlayerMovement : MonoBehaviour {
     float range = 100;
     public int blasterCount;
 
-    public GameObject mainCameram, hitParticle;
+    AudioSource blasterSound;
 
-    public ParticleSystem blaster;
+    public AudioSource explosionAudio;
+
+    public GameObject hitParticle;
+
+    public ParticleSystem blasterParticle;
     
     public Transform shootOrigin;
     public LayerMask collisionMask;
@@ -33,11 +37,12 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         blasterDamage = 25;     
-        blaster.Stop();
+        blasterParticle.Stop();
         pickupText.SetActive(false);        
         rbd = GetComponent<Rigidbody>();        
         pickupTextString = pickupText.GetComponent<Text>();
         Time.timeScale = 1;
+        blasterSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -63,7 +68,9 @@ public class PlayerMovement : MonoBehaviour {
 	void Shoot(){   
         if(Input.GetButtonDown("Fire1") && blasterCount > 0){
             //Blaster Particle play
-            blaster.Play();
+            blasterParticle.Play();
+            //Blaster Sound Play
+            blasterSound.Play();
             blasterCount--;
             RaycastHit hit;
             if(Physics.Raycast(shootOriginPosition, shootOrigin.right * range, out hit, range, collisionMask)){
@@ -104,10 +111,7 @@ public class PlayerMovement : MonoBehaviour {
     
     void OnCollisionEnter(Collision other) {
 		if (other.gameObject.tag == "Asteroid" && !godMode) {
-			print("Game Over");
-			Destroy(gameObject);
-			dead = true;
-            Time.timeScale = 0;            
+            Dead();
 		}
 	}
     
@@ -127,6 +131,13 @@ public class PlayerMovement : MonoBehaviour {
         godMode = true;
         yield return new WaitForSeconds(5.2f);
         godMode = false;        
+    }
+
+    void Dead() {
+        Destroy(gameObject);
+        dead = true;
+        explosionAudio.Play();
+        Time.timeScale = 0;
     }
 
     void DamageMultiplier(){
