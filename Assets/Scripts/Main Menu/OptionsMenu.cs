@@ -24,7 +24,7 @@ public class OptionsMenu : MonoBehaviour {
         }
         resDropdown.AddOptions(resolutionOptions);
         resDropdown.value = currentResolutionIndex;
-        resDropdown.RefreshShownValue();
+        resDropdown.RefreshShownValue();        
     }
 
     public void VolumeSetting(float volume) {
